@@ -1,0 +1,14 @@
+Notes about this program:
+
+Instructions:
+
+Press spacebar to shoot missiles.
+Press the arrow keys to move right and left.
+Press P to pause, and again to unpause.
+Press escape to quit.
+
+Cheat: 
+Press H to level up, which allows you to demo the levels more quickly. 
+
+Depending on the level, you will want to shoot certain items and avoid others. Avoid the ducks, eagles, and spaceships. Shoot everything else! Avoid getting hit by shocks, poops, or laser beams.
+

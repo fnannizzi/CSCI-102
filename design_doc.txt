@@ -1,0 +1,80 @@
+Francesca Nannizzi
+CSCI 102
+HW5 - Game Project
+4.23.12
+
+Design Document: Game Project
+Purpose/Overview:
+	This software should implement a game with three levels. The user can move right and left with arrow keys, and shoot missiles with the space bar. The first level takes place in a pond. The user must shoot the eels, bubbles, and fish, but avoid shooting the ducks. The eels shoot back at the user, and the user should avoid the bolts of electric shock. The next level is similar, but takes place in the sky. Here the user should shoot the gulls, birds, and geese, but avoid the eagles. The gulls shoot poop back at the user and follow him across the screen. The last level takes place in outer space. The user should shoot the UFOs, meteors, and asteroids, but avoid the space shuttles. The UFOs shoot back at the user.
+
+Requirements:
+	This game should have three levels, three "enemies" that shoot back at you, and a total of 12 "thing" besides the user's character that move. The game should use polymorphism and inheritance. 
+
+Classes:
+	This software uses a myriad of classes. Each animal object has its own class. Certain animals inherit from the target class, and all animals and other objects inherit from the object class. This allows the game logic to group the 9 different types of target objects in one array, and to reference them accordingly. The game logic is also defined in a class.  See function documentation, below.
+
+Global Data/Functions:
+       There aren't any global variables used in this software. Everything is defined within a class definition. 
+     
+High-level Architecture:
+	   The program is run through a main file, which instantiates the window for the game. The game logic is run through a large class, which uses Qt functions and logic to control the game. The game class calls on many different "thing" classes, which hold logic for the many objects that appear on the screen. These "things" may inherit from the target class, the object class, or both. 
+
+User Interface:
+     The user will interact with the game by pressing the spacebar to shoot, right and left arrow keys to move, escape to quit, and P to pause and unpause. 
+
+Function Documentation:
+
+Game Class:
+  Game(QWidget *parent = 0); 			constructor
+  ~Game(); 					destructor
+  void startGame();				begins game
+  void paintEvent(QPaintEvent *event);		paints objects
+  void timerEvent(QTimerEvent *event);		performs game logic based on timer
+  void keyPressEvent(QKeyEvent *event);		takes user input from keyboard and performs logic
+  void pauseGame();				pauses/unpauses game
+  void launchMissile();				launches a missile
+  void stopGame();				ends game
+  void victory();				displays victory, ends game
+  void checkCollision(int i);			checks to see if missiles have hit their mark
+  void newClassname(int i);			creates new object of type classname			
+
+  
+Object Class:
+   Object();					constructor, no arguments
+   Object(int y);				constructor, single argument
+   Object(int x, int y);			constructor, two arguments
+   ~Object();					destructor	
+   QRect getRect();				returns image bounding rectangle
+   QImage & getImage();				returns image
+   
+Target Class:
+  Target(int x, int y, int s, bool l);		constructor
+  void resetState();				resets object
+  bool isDestroyed();				returns whether object has been destroyed
+  void setDestroyed(bool);			sets whether object has been destroyed
+  void setRect(QRect);				sets bounding rect
+  void autoMove();				moves object
+  int returnType();				returns type 0 for base class
+  
+Duck, Fish, Bubble, Goose, Bird, Eagle, Asteroid, Meteor, Ship Classes:
+  Classname(int x, int y, int s, bool l);	constructor
+  int returnType();				returns type 1 or 2 based on whether object should be avoided
+  
+Eel, Gull, UFO Classes:
+  Classname(int x, int y, int s);		constructor
+  void resetState();				resets object
+  bool isDestroyed();				returns whether object has been destroyed
+  void setDestroyed(bool);			sets whether object has been destroyed
+  void setRect(QRect);				sets bounding rect
+  void autoMove(int x);				moves object
+
+Bolt, Poop, Beam Classes:
+  Classname(int x, int y);			constructor
+  void resetState();				resets object
+  bool isDestroyed();				returns whether object has been destroyed
+  void setDestroyed(bool);			sets whether object has been destroyed
+  void setRect(QRect);				sets bounding rect
+  void autoMove(int x);				moves object, tracks user character
+  void setValid(bool);				sets whether object is valid
+  
+  
